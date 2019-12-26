@@ -8,7 +8,7 @@ import android.zulu13.com.wforecast.utils.Utils
 import androidx.recyclerview.widget.RecyclerView
 
 
-class LocationWeatherAdapter : RecyclerView.Adapter<LocationWeatherAdapter.ViewHolder>(){
+class LocationWeatherAdapter(val clickListener: LocationWeatherListener) : RecyclerView.Adapter<LocationWeatherAdapter.ViewHolder>(){
     var data = listOf<LocationWeather>()
         set(value) {
             field = value
@@ -21,8 +21,7 @@ class LocationWeatherAdapter : RecyclerView.Adapter<LocationWeatherAdapter.ViewH
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-
-        holder.bind(item)
+        holder.bind(clickListener, item)
     }
 
     override fun getItemCount(): Int {
@@ -31,11 +30,16 @@ class LocationWeatherAdapter : RecyclerView.Adapter<LocationWeatherAdapter.ViewH
 
     class ViewHolder private constructor(val binding: PlaceListItemBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: LocationWeather){
+        fun bind(clickListener: LocationWeatherListener, item: LocationWeather){
+
+            binding.location = item
+            // TODO use binding adapter for formatting
             binding.textPlaceName.text = item.name
             binding.textPlacePhenomenon.text = item.dayPhenomenon
             binding.textPlaceTemp.text =
                 Utils.formatForecastTempStringCelsius(item.nightMinTemp, item.dayMaxTemp)
+
+            binding.clickListener = clickListener
         }
 
         companion object {
@@ -46,4 +50,15 @@ class LocationWeatherAdapter : RecyclerView.Adapter<LocationWeatherAdapter.ViewH
             }
         }
     }
+}
+
+class LocationWeatherListener(val clickListener: (location : LocationWeather) -> Unit){
+    //fun onClick(location: LocationWeather) = location.name?.let { clickListener(it) }
+//    fun onClick(locationWeather: LocationWeather){
+//        Log.i("LocationWeatherAdapter", "onClick called")
+//        //locationWeather.name?.let { clickListener(it) }
+//    }
+
+    //fun onClick(location : LocationWeather) = location.name?.let { clickListener(it) }
+    fun onClick(location : LocationWeather) = clickListener(location)
 }

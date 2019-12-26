@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import android.zulu13.com.wforecast.R
 import android.zulu13.com.wforecast.data.models.getLocationWeather
 import android.zulu13.com.wforecast.databinding.MainFragmentBinding
@@ -34,7 +35,11 @@ class MainFragment : Fragment() {
         val viewModelFactory = SleepTrackerViewModelFactory(application)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
-        val listAdapter = LocationWeatherAdapter()
+        val listAdapter = LocationWeatherAdapter(LocationWeatherListener {location ->
+            Log.i("MainFragment", "on location clicked")
+            Toast.makeText(context, location.name , Toast.LENGTH_SHORT).show()
+        })
+
         binding.listLocationWeather?.adapter = listAdapter
 
         viewModel.forecast.observe(this, Observer {

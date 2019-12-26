@@ -8,9 +8,13 @@
         <variable
             name="location"
             type="android.zulu13.com.wforecast.data.models.LocationWeather" />
+        <variable
+            name="clickListener"
+            type="android.zulu13.com.wforecast.ui.main.LocationWeatherListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{() -> clickListener.onClick(location)}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
