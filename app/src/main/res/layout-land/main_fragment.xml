@@ -17,36 +17,42 @@
         android:background="@drawable/background2"
         tools:context=".ui.main.MainFragment">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="70dp" />
+
         <TextView
             android:id="@+id/text_title_day"
+            style="@style/land_today_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:fontFamily="monospace"
             android:text="@string/title_day"
             android:textAlignment="center"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/image_day_one_day_icon" />
 
         <ImageView
             android:id="@+id/image_day_one_day_icon"
             imageResource="@{mainViewModel.dayOneDayIcon}"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/text_title_day"
-            app:layout_constraintStart_toEndOf="@+id/text_title_day"
-            app:layout_constraintTop_toTopOf="@+id/text_title_day" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_day_one_day_temp"
+            style="@style/land_today_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@{mainViewModel.dayOneDayTemp}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/text_day_one_day_phenomenon"
@@ -54,12 +60,16 @@
 
         <TextView
             android:id="@+id/text_day_one_day_phenomenon"
-            android:layout_width="wrap_content"
+            style="@style/land_today_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:lineSpacingExtra="0sp"
             android:text="@{mainViewModel.dayOneDayPhenomenon}"
-            android:textSize="30sp"
+            android:textAlignment="textEnd"
+            android:textSize="22sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="LIGHT RAIN" />
 
@@ -68,50 +78,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.23" />
+            app:layout_constraintGuide_percent="0.27" />
 
         <TextView
             android:id="@+id/text_title_night"
+            style="@style/land_today_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="monospace"
             android:text="@string/title_night"
             android:textAlignment="center"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline_today"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+            app:layout_constraintTop_toBottomOf="@+id/image_day_one_night_icon" />
 
         <ImageView
             android:id="@+id/image_day_one_night_icon"
             imageResource="@{mainViewModel.dayOneNightIcon}"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/text_title_night"
-            app:layout_constraintStart_toEndOf="@+id/text_title_night"
-            app:layout_constraintTop_toTopOf="@+id/text_title_night" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
         <TextView
             android:id="@+id/day_one_night_phenomenon"
-            android:layout_width="wrap_content"
+            style="@style/land_today_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:lineSpacingExtra="0sp"
             android:text="@{mainViewModel.dayOneNightPhenomenon}"
-            android:textSize="30sp"
+            android:textAlignment="textEnd"
+            android:textSize="22sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toTopOf="@+id/guideline4"
             tools:text="SNOW" />
 
         <TextView
             android:id="@+id/day_one_night_temp"
+            style="@style/land_today_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@{mainViewModel.dayOneNightTemp}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline_today"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/day_one_night_phenomenon"
@@ -131,11 +145,11 @@
             android:layout_marginStart="8dp"
             android:text="@{mainViewModel.dayTwoDate}"
             android:textAlignment="center"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline_today"
-            tools:text="MON, 23" />
+            tools:text="MON, 23"
+            style="@style/land_weekday_text" />
 
         <ImageView
             android:id="@+id/image_day_two_icon"
@@ -151,11 +165,11 @@
 
         <TextView
             android:id="@+id/text_day_two_temp"
+            style="@style/land_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@{mainViewModel.dayTwoTemp}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/guideline_today"
@@ -170,11 +184,11 @@
 
         <TextView
             android:id="@+id/text_day_three_date"
+            style="@style/land_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{mainViewModel.dayThreeDate}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
@@ -194,11 +208,11 @@
 
         <TextView
             android:id="@+id/text_day_three_temp"
+            style="@style/land_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@{mainViewModel.dayThreeTemp}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
@@ -213,11 +227,11 @@
 
         <TextView
             android:id="@+id/text_day_four_date"
+            style="@style/land_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{mainViewModel.dayFourDate}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3"
@@ -237,11 +251,11 @@
 
         <TextView
             android:id="@+id/text_day_four_temp"
+            style="@style/land_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@{mainViewModel.dayFourTemp}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/guideline3"

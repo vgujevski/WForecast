@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="android.zulu13.com.wforecast.ui.main.MainFragment"
+        android:label="Weather in Estonia"
+        tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/action_mainFragment_to_locationWeatherFragment"
+            app:destination="@id/locationWeatherFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationWeatherFragment"
+        android:name="android.zulu13.com.wforecast.ui.locationweather.LocationWeatherFragment"
+        tools:layout="@layout/location_weather_fragment">
+        <argument
+            android:name="location"
+            app:argType="android.zulu13.com.wforecast.data.models.LocationWeather" />
+    </fragment>
+</navigation>

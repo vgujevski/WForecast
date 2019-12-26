@@ -17,4 +17,19 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <style name="style_weekday_text">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="land_weekday_text">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="land_today_text">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
 </resources>

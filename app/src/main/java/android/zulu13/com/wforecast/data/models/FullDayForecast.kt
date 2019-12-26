@@ -1,5 +1,7 @@
 package android.zulu13.com.wforecast.data.models
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.serialization.Serializable
@@ -46,6 +48,7 @@ fun FullDayForecast.getLocationWeather() : ArrayList<LocationWeather>{
     return list
 }
 
+
 data class LocationWeather(
     val name: String? = "",
     val dayPhenomenon: String?  = "",
@@ -54,4 +57,39 @@ data class LocationWeather(
     var nightMinTemp: Int?  = 0,
     val dayMaxTemp: Int? = 0,
     var nightMaxTemp: Int? = 0
-)
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readValue(Int::class.java.classLoader) as? Int
+    )
+
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(dayPhenomenon)
+        parcel.writeString(nightPhenomenon)
+        parcel.writeValue(dayMinTemp)
+        parcel.writeValue(nightMinTemp)
+        parcel.writeValue(dayMaxTemp)
+        parcel.writeValue(nightMaxTemp)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<LocationWeather> {
+        override fun createFromParcel(parcel: Parcel): LocationWeather {
+            return LocationWeather(parcel)
+        }
+
+        override fun newArray(size: Int): Array<LocationWeather?> {
+            return arrayOfNulls(size)
+        }
+    }
+}

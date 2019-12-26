@@ -5,6 +5,7 @@ import android.util.Log
 import android.zulu13.com.wforecast.R
 import android.zulu13.com.wforecast.data.ForecastRepository
 import android.zulu13.com.wforecast.data.database.getDatabase
+import android.zulu13.com.wforecast.data.models.LocationWeather
 import android.zulu13.com.wforecast.utils.Utils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -96,7 +97,13 @@ class MainViewModel(application: Application) : ViewModel() {
     @UnstableDefault
     private val repository = ForecastRepository(database)
 
+    private var _navigateToLocWeather = MutableLiveData<LocationWeather>()
+    val navigateToLocWeather : LiveData<LocationWeather>
+        get() = _navigateToLocWeather
+
     init {
+
+        _navigateToLocWeather.value = null
         Log.i("MainViewModel", "init called")
         _dayOneDayIcon.value = R.drawable.loading
         _dayOneDayPhenomenon.value = ""
@@ -146,6 +153,14 @@ class MainViewModel(application: Application) : ViewModel() {
         _dayFourDate.value = Utils.formatForecastDateString(forecast.value?.forecasts?.get(DAY_FOUR)?.date)
         _dayFourIcon.value = Utils.assignIcons(forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.phenomenon)
         _dayFourTemp.value = Utils.formatForecastTempStringCelsius(forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.tempmin, forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.tempmax)
+    }
+
+    fun onNavitageToLocationWeather(location: LocationWeather) {
+        _navigateToLocWeather.value = location
+    }
+
+    fun onNavigateToLocationWeatherCompleted(){
+        _navigateToLocWeather.value = null
     }
 
     override fun onCleared() {

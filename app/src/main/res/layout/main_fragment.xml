@@ -17,15 +17,23 @@
         android:background="@drawable/background2"
         tools:context=".ui.main.MainFragment">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="160dp" />
+
         <TextView
             android:id="@+id/text_title_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="monospace"
             android:text="@string/title_day"
             android:textAlignment="center"
             android:textSize="30sp"
+            android:typeface="monospace"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +43,7 @@
             imageResource="@{mainViewModel.dayOneDayIcon}"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/text_title_day"
             app:layout_constraintStart_toEndOf="@+id/text_title_day"
             app:layout_constraintTop_toTopOf="@+id/text_title_day" />
@@ -53,12 +61,14 @@
 
         <TextView
             android:id="@+id/text_day_one_day_phenomenon"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@{mainViewModel.dayOneDayPhenomenon}"
-            android:textSize="30sp"
+            android:textAlignment="textEnd"
+            android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="LIGHT RAIN" />
 
@@ -67,13 +77,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.18" />
 
         <TextView
             android:id="@+id/text_title_night"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="monospace"
             android:text="@string/title_night"
             android:textAlignment="center"
@@ -87,19 +97,21 @@
             imageResource="@{mainViewModel.dayOneNightIcon}"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/text_title_night"
             app:layout_constraintStart_toEndOf="@+id/text_title_night"
             app:layout_constraintTop_toTopOf="@+id/text_title_night" />
 
         <TextView
             android:id="@+id/day_one_night_phenomenon"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@{mainViewModel.dayOneNightPhenomenon}"
-            android:textSize="30sp"
+            android:textAlignment="textEnd"
+            android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="@+id/guideline4"
             tools:text="SNOW" />
 
@@ -119,16 +131,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.37" />
 
         <TextView
             android:id="@+id/text_day_two_date"
+            style="@style/style_weekday_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="@{mainViewModel.dayTwoDate}"
             android:textAlignment="center"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline_today"
@@ -148,11 +160,11 @@
 
         <TextView
             android:id="@+id/text_day_two_temp"
+            style="@style/style_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{mainViewModel.dayTwoTemp}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline_today"
@@ -163,15 +175,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4" />
+            app:layout_constraintGuide_percent="0.46" />
 
         <TextView
             android:id="@+id/text_day_three_date"
+            style="@style/style_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="@{mainViewModel.dayThreeDate}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
@@ -191,11 +203,11 @@
 
         <TextView
             android:id="@+id/text_day_three_temp"
+            style="@style/style_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{mainViewModel.dayThreeTemp}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
@@ -206,15 +218,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.55" />
 
         <TextView
             android:id="@+id/text_day_four_date"
+            style="@style/style_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="@{mainViewModel.dayFourDate}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3"
@@ -234,11 +246,11 @@
 
         <TextView
             android:id="@+id/text_day_four_temp"
+            style="@style/style_weekday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{mainViewModel.dayFourTemp}"
-            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3"
@@ -249,7 +261,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6" />
+            app:layout_constraintGuide_percent="0.64" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_location_weather"

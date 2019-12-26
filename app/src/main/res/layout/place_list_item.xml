@@ -30,7 +30,7 @@
             style="@style/text_place_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_place_name"
             app:layout_constraintTop_toBottomOf="@+id/text_place_name"
@@ -52,7 +52,7 @@
             android:id="@+id/text_place_name"
             style="@style/text_place_black"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Kuressaare" />

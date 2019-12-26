@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import android.zulu13.com.wforecast.R
 import android.zulu13.com.wforecast.data.models.getLocationWeather
 import android.zulu13.com.wforecast.databinding.MainFragmentBinding
@@ -13,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import kotlinx.serialization.UnstableDefault
 
 @UnstableDefault
@@ -36,11 +36,18 @@ class MainFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
         val listAdapter = LocationWeatherAdapter(LocationWeatherListener {location ->
-            Log.i("MainFragment", "on location clicked")
-            Toast.makeText(context, location.name , Toast.LENGTH_SHORT).show()
+            //viewModel.onNavitageToLocationWeather(location)
+            // TODO fix double call to navigate
+            this.findNavController().navigate(MainFragmentDirections.actionMainFragmentToLocationWeatherFragment(location))
         })
 
         binding.listLocationWeather?.adapter = listAdapter
+
+        viewModel.navigateToLocWeather.observe(this, Observer {
+            it?.let {
+                //this.findNavController().navigate(MainFragmentDirections.actionMainFragmentToLocationWeatherFragment(it))
+            }
+        })
 
         viewModel.forecast.observe(this, Observer {
             it?.let {

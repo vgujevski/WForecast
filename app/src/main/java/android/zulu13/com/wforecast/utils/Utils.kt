@@ -8,16 +8,21 @@ object Utils {
 
     /**
      *  Calculating average and returning temperature in words
-     *  i.e. minus twenty five degrees
+     *  i.e. The average temperature today is "minus twenty five degrees"  celsius.
      * */
 
-    fun avgTempToWords(minTemp: Int, maxTemp: Int) : String{
-
+    fun avgCelsiusTempToWords(minTemp: Int, maxTemp: Int) : String{
+        val prefix = "The average temperature today is "
+        val postfix = " celsius."
         var avg = (minTemp + maxTemp) / 2
         var minus = ""
         var degrees = " degrees"
         if(avg == 0){
             return "Zero degrees"
+        }
+        if(avg < 0){
+            minus = "minus"
+            avg = -avg
         }
         if(avg == 1){
             degrees = " degree"
@@ -73,7 +78,7 @@ object Utils {
             avg /= 10
         }
 
-        return if (avg == 0) minus + soFar + degrees else  minus + numNames[avg] + " hundred" + soFar + degrees
+        return if (avg == 0) "$prefix $minus $soFar $degrees $postfix" else prefix + minus + numNames[avg] + " hundred" + soFar + degrees + postfix
     }
     /**
      *  Formats 2019-12-23 to Mon, Dec 23
@@ -95,7 +100,19 @@ object Utils {
     @JvmStatic
     fun formatForecastTempStringCelsius(minTemp: Int?, maxTemp: Int?) : String{
         //TODO handle null parameters
-        return "$minTemp/$maxTemp\u2103"
+        return if(minTemp == null && maxTemp == null){
+            ""
+        }else if(minTemp == null && maxTemp != null){
+            "$maxTemp\u2103"
+        }else if(minTemp != null && maxTemp == null){
+            "$minTemp\u2103"
+        }else if(minTemp != null && maxTemp != null && minTemp < maxTemp){
+            "$minTemp/$maxTemp\u2103"
+        }else if(minTemp != null && maxTemp != null && minTemp == maxTemp){
+            "$minTemp\u2103"
+        } else{
+            "$maxTemp/$minTemp\u2103"
+        }
     }
 
 
