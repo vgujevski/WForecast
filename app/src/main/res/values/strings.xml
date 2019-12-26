@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WForecast</string>
+    <string name="title_day">DAY</string>
+    <string name="title_night">NIGHT</string>
+</resources>
