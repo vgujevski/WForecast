@@ -8,18 +8,3 @@ import androidx.databinding.BindingAdapter
 fun setImageViewResource(view: ImageView, resId : Int) {
     view.setImageResource(resId)
 }
-
-
-//@BindingAdapter("imageUrl")
-//fun bindImage(imgView: ImageView, imgUrl: String?){
-//    imgUrl?.let {
-//        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-//        Glide.with(imgView.context)
-//            .load(imgUri)
-//            .apply(RequestOptions()
-//                .placeholder(R.drawable.loading_animation)
-//                .error(R.drawable.ic_broken_image))
-//            .into(imgView)
-//
-//    }
-//}

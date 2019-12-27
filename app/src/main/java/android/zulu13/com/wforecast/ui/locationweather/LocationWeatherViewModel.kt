@@ -1,6 +1,5 @@
 package android.zulu13.com.wforecast.ui.locationweather
 
-import android.util.Log
 import android.zulu13.com.wforecast.data.models.LocationWeather
 import android.zulu13.com.wforecast.utils.Utils
 import androidx.lifecycle.LiveData
@@ -36,7 +35,6 @@ class LocationWeatherViewModel (location: LocationWeather) : ViewModel(){
 
 
     init {
-        Log.i("LocationViewModel", "init called ${location.name}")
         _locationName.value = location.name
         _avgTempWord.value = Utils.avgCelsiusTempToWords(location.nightMinTemp ?: 0, location.dayMaxTemp ?: 0)
 

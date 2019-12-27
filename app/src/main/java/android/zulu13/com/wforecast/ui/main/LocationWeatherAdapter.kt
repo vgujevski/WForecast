@@ -33,7 +33,6 @@ class LocationWeatherAdapter(val clickListener: LocationWeatherListener) : Recyc
         fun bind(clickListener: LocationWeatherListener, item: LocationWeather){
 
             binding.location = item
-            // TODO use binding adapter for formatting
             binding.textPlaceName.text = item.name
             binding.textPlacePhenomenon.text = item.dayPhenomenon
             binding.textPlaceTemp.text =
@@ -53,12 +52,6 @@ class LocationWeatherAdapter(val clickListener: LocationWeatherListener) : Recyc
 }
 
 class LocationWeatherListener(val clickListener: (location : LocationWeather) -> Unit){
-    //fun onClick(location: LocationWeather) = location.name?.let { clickListener(it) }
-//    fun onClick(locationWeather: LocationWeather){
-//        Log.i("LocationWeatherAdapter", "onClick called")
-//        //locationWeather.name?.let { clickListener(it) }
-//    }
 
-    //fun onClick(location : LocationWeather) = location.name?.let { clickListener(it) }
     fun onClick(location : LocationWeather) = clickListener(location)
 }

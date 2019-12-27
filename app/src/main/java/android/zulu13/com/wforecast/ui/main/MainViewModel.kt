@@ -1,7 +1,6 @@
 package android.zulu13.com.wforecast.ui.main
 
 import android.app.Application
-import android.util.Log
 import android.zulu13.com.wforecast.R
 import android.zulu13.com.wforecast.data.ForecastRepository
 import android.zulu13.com.wforecast.data.database.getDatabase
@@ -104,7 +103,7 @@ class MainViewModel(application: Application) : ViewModel() {
     init {
 
         _navigateToLocWeather.value = null
-        Log.i("MainViewModel", "init called")
+
         _dayOneDayIcon.value = R.drawable.loading
         _dayOneDayPhenomenon.value = ""
         _dayOneDayTemp.value = ""

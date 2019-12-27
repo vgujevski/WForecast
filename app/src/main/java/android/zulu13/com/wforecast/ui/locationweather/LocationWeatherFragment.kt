@@ -28,6 +28,4 @@ class LocationWeatherFragment : Fragment(){
 
         return binding.root
     }
-
-
 }

@@ -20,7 +20,6 @@ class ForecastRepository(private val database: ForecastsDatabase){
 
 
     val forecast: LiveData<Forecast> = Transformations.map(database.forecastDao.getForecast(KEY)){
-        Log.i("ForecastRepository", "it. called")
         it?.asDomainModel()
     }
 

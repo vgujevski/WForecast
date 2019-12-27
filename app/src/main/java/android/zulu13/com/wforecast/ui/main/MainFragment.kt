@@ -1,7 +1,6 @@
 package android.zulu13.com.wforecast.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,16 +35,15 @@ class MainFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
         val listAdapter = LocationWeatherAdapter(LocationWeatherListener {location ->
-            //viewModel.onNavitageToLocationWeather(location)
-            // TODO fix double call to navigate
-            this.findNavController().navigate(MainFragmentDirections.actionMainFragmentToLocationWeatherFragment(location))
+            viewModel.onNavitageToLocationWeather(location)
         })
 
         binding.listLocationWeather?.adapter = listAdapter
 
         viewModel.navigateToLocWeather.observe(this, Observer {
             it?.let {
-                //this.findNavController().navigate(MainFragmentDirections.actionMainFragmentToLocationWeatherFragment(it))
+                this.findNavController().navigate(MainFragmentDirections.actionMainFragmentToLocationWeatherFragment(it))
+                viewModel.onNavigateToLocationWeatherCompleted()
             }
         })
 
@@ -53,7 +51,6 @@ class MainFragment : Fragment() {
             it?.let {
                 viewModel.updateUi()
                 listAdapter.data = it.forecasts[0].getLocationWeather()
-                Log.i("MainFragment", " date: ${it.forecasts[0].date}")
             }
         })
 

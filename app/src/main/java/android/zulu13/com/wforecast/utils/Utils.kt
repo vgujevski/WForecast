@@ -18,7 +18,7 @@ object Utils {
         var minus = ""
         var degrees = " degrees"
         if(avg == 0){
-            return "Zero degrees"
+            return  prefix + "zero degrees" + postfix
         }
         if(avg < 0){
             minus = "minus"
@@ -99,7 +99,6 @@ object Utils {
      * */
     @JvmStatic
     fun formatForecastTempStringCelsius(minTemp: Int?, maxTemp: Int?) : String{
-        //TODO handle null parameters
         return if(minTemp == null && maxTemp == null){
             ""
         }else if(minTemp == null && maxTemp != null){
