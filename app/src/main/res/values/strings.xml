@@ -2,4 +2,5 @@
     <string name="app_name">WForecast</string>
     <string name="title_day">DAY:</string>
     <string name="title_night">NIGHT:</string>
+    <string name="weather_icon">weather icon</string>
 </resources>

@@ -35,7 +35,7 @@ class MainFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
         val listAdapter = LocationWeatherAdapter(LocationWeatherListener {location ->
-            viewModel.onNavitageToLocationWeather(location)
+            viewModel.onNavigateToLocationWeather(location)
         })
 
         binding.listLocationWeather?.adapter = listAdapter

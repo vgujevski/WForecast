@@ -8,6 +8,7 @@ import android.zulu13.com.wforecast.data.models.LocationWeather
 import android.zulu13.com.wforecast.utils.Utils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -100,6 +101,10 @@ class MainViewModel(application: Application) : ViewModel() {
     val navigateToLocWeather : LiveData<LocationWeather>
         get() = _navigateToLocWeather
 
+
+
+
+
     init {
 
         _navigateToLocWeather.value = null
@@ -132,6 +137,11 @@ class MainViewModel(application: Application) : ViewModel() {
 
     val forecast = repository.forecast
 
+    /**  if forecast is not null , layout in main fragment will be visible*/
+    val layoutVisible = Transformations.map(forecast) {
+        null != it
+    }
+
     fun updateUi(){
         _dayOneDayIcon.value = Utils.assignIcons(forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.phenomenon)
         _dayOneDayPhenomenon.value = forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.phenomenon
@@ -154,7 +164,7 @@ class MainViewModel(application: Application) : ViewModel() {
         _dayFourTemp.value = Utils.formatForecastTempStringCelsius(forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.tempmin, forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.tempmax)
     }
 
-    fun onNavitageToLocationWeather(location: LocationWeather) {
+    fun onNavigateToLocationWeather(location: LocationWeather) {
         _navigateToLocWeather.value = location
     }
 
