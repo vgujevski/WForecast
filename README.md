@@ -5,7 +5,7 @@
 ## Bonus tasks completed:
 1. Forecast data is cached, important for providing smooth user experience for the
    moments when the internet connection is not available.
-2. Fragment transition are animated, using simple slide-in slide-out animation, animation 
+2. Fragment transitions are animated, using simple slide-in slide-out animation, animation 
    in reasonable amounts adds a feeling of real interaction and responsiveness, improving overall UX.
 3. Weather conditions are represented by matching icons, displaying information as icons or
    pictures makes app easier to localize.
