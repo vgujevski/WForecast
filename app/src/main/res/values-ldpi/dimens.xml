@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="start_margin">4dp</dimen>
+    <dimen name="end_margin">4dp</dimen>
+    <dimen name="primary_text_size">18sp</dimen>
+    <dimen name="secondary_text_size">16sp</dimen>
+    <dimen name="icon_weather_height">20dp</dimen>
+    <dimen name="icon_weather_width">20dp</dimen>
+</resources>

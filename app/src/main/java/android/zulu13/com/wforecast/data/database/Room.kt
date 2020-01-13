@@ -21,18 +21,20 @@ interface ForecastDao {
 }
 
 @Database(entities = [DatabaseForecast::class], version = 2, exportSchema = false)
-abstract class ForecastsDatabase: RoomDatabase(){
+abstract class ForecastsDatabase : RoomDatabase() {
     abstract val forecastDao: ForecastDao
 }
 
 private lateinit var INSTANCE: ForecastsDatabase
 
-fun getDatabase(context: Context) : ForecastsDatabase{
-    synchronized(ForecastsDatabase::class.java){
+fun getDatabase(context: Context): ForecastsDatabase {
+    synchronized(ForecastsDatabase::class.java) {
         if (!::INSTANCE.isInitialized) {
-            INSTANCE = Room.databaseBuilder(context.applicationContext,
+            INSTANCE = Room.databaseBuilder(
+                context.applicationContext,
                 ForecastsDatabase::class.java,
-                "forecasts").build()
+                "forecasts"
+            ).build()
         }
     }
     return INSTANCE

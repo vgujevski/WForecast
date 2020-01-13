@@ -1,9 +1,7 @@
 package android.zulu13.com.wforecast.ui.main
 
-import android.app.Application
 import android.zulu13.com.wforecast.R
 import android.zulu13.com.wforecast.data.ForecastRepository
-import android.zulu13.com.wforecast.data.database.getDatabase
 import android.zulu13.com.wforecast.data.models.LocationWeather
 import android.zulu13.com.wforecast.utils.Utils
 import androidx.lifecycle.LiveData
@@ -22,10 +20,10 @@ private const val DAY_THREE = 2
 private const val DAY_FOUR = 3
 
 @UnstableDefault
-class MainViewModel(application: Application) : ViewModel() {
-
+class MainViewModel(repository: ForecastRepository) : ViewModel() {
     //<editor-fold desc="LiveData UI fields">
     // day one
+    // TODO move formatting of values to binding adapters
     private var _dayOneDayIcon = MutableLiveData<Int>()
     val dayOneDayIcon: LiveData<Int>
         get() = _dayOneDayIcon
@@ -52,61 +50,52 @@ class MainViewModel(application: Application) : ViewModel() {
 
     // day two
     private var _dayTwoDate = MutableLiveData<String>()
-    val dayTwoDate : LiveData<String>
+    val dayTwoDate: LiveData<String>
         get() = _dayTwoDate
 
     private var _dayTwoIcon = MutableLiveData<Int>()
-    val dayTwoIcon : LiveData<Int>
+    val dayTwoIcon: LiveData<Int>
         get() = _dayTwoIcon
 
     private var _dayTwoTemp = MutableLiveData<String>()
-    val dayTwoTemp : LiveData<String>
+    val dayTwoTemp: LiveData<String>
         get() = _dayTwoTemp
 
     // day three
     private var _dayThreeDate = MutableLiveData<String>()
-    val dayThreeDate : LiveData<String>
+    val dayThreeDate: LiveData<String>
         get() = _dayThreeDate
 
     private var _dayThreeIcon = MutableLiveData<Int>()
-    val dayThreeIcon : LiveData<Int>
+    val dayThreeIcon: LiveData<Int>
         get() = _dayThreeIcon
 
     private var _dayThreeTemp = MutableLiveData<String>()
-    val dayThreeTemp : LiveData<String>
+    val dayThreeTemp: LiveData<String>
         get() = _dayThreeTemp
 
     // day four
     private var _dayFourDate = MutableLiveData<String>()
-    val dayFourDate : LiveData<String>
+    val dayFourDate: LiveData<String>
         get() = _dayFourDate
 
     private var _dayFourIcon = MutableLiveData<Int>()
-    val dayFourIcon : LiveData<Int>
+    val dayFourIcon: LiveData<Int>
         get() = _dayFourIcon
 
     private var _dayFourTemp = MutableLiveData<String>()
-    val dayFourTemp : LiveData<String>
+    val dayFourTemp: LiveData<String>
         get() = _dayFourTemp
     //</editor-fold>
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private val database = getDatabase(application)
-    @UnstableDefault
-    private val repository = ForecastRepository(database)
-
     private var _navigateToLocWeather = MutableLiveData<LocationWeather>()
-    val navigateToLocWeather : LiveData<LocationWeather>
+    val navigateToLocWeather: LiveData<LocationWeather>
         get() = _navigateToLocWeather
 
-
-
-
-
     init {
-
         _navigateToLocWeather.value = null
 
         _dayOneDayIcon.value = R.drawable.loading
@@ -115,7 +104,7 @@ class MainViewModel(application: Application) : ViewModel() {
 
         _dayOneNightIcon.value = R.drawable.loading
         _dayOneNightPhenomenon.value = ""
-        _dayOneNightTemp.value =""
+        _dayOneNightTemp.value = ""
 
         _dayTwoDate.value = ""
         _dayTwoIcon.value = R.drawable.loading
@@ -132,7 +121,6 @@ class MainViewModel(application: Application) : ViewModel() {
         coroutineScope.launch {
             repository.refreshForecast()
         }
-
     }
 
     val forecast = repository.forecast
@@ -142,33 +130,63 @@ class MainViewModel(application: Application) : ViewModel() {
         null != it
     }
 
-    fun updateUi(){
-        _dayOneDayIcon.value = Utils.assignIcons(forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.phenomenon)
-        _dayOneDayPhenomenon.value = forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.phenomenon
-        _dayOneDayTemp.value = Utils.formatForecastTempStringCelsius(forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.tempmin, forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.tempmax)
+    /** display error message if forecast data is not available*/
+    val errorMessageVisible = Transformations.map(forecast){
+        null == it
+    }
 
-        _dayOneNightIcon.value = Utils.assignIcons(forecast.value?.forecasts?.get(DAY_ONE)?.nightForecast?.phenomenon)
-        _dayOneNightPhenomenon.value = forecast.value?.forecasts?.get(DAY_ONE)?.nightForecast?.phenomenon
-        _dayOneNightTemp.value = Utils.formatForecastTempStringCelsius(forecast.value?.forecasts?.get(DAY_ONE)?.nightForecast?.tempmin, forecast.value?.forecasts?.get(DAY_ONE)?.nightForecast?.tempmax)
+    fun updateUi() {
+        _dayOneDayIcon.value =
+            Utils.assignIcons(forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.phenomenon)
+        _dayOneDayPhenomenon.value =
+            forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.phenomenon
+        _dayOneDayTemp.value = Utils.formatForecastTempStringCelsius(
+            forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.tempmin,
+            forecast.value?.forecasts?.get(DAY_ONE)?.dayForecast?.tempmax
+        )
 
-        _dayTwoDate.value = Utils.formatForecastDateString(forecast.value?.forecasts?.get(DAY_TWO)?.date)
-        _dayTwoIcon.value = Utils.assignIcons(forecast.value?.forecasts?.get(DAY_TWO)?.dayForecast?.phenomenon)
-        _dayTwoTemp.value = Utils.formatForecastTempStringCelsius(forecast.value?.forecasts?.get(DAY_TWO)?.dayForecast?.tempmin, forecast.value?.forecasts?.get(DAY_TWO)?.dayForecast?.tempmax)
+        _dayOneNightIcon.value =
+            Utils.assignIcons(forecast.value?.forecasts?.get(DAY_ONE)?.nightForecast?.phenomenon)
+        _dayOneNightPhenomenon.value =
+            forecast.value?.forecasts?.get(DAY_ONE)?.nightForecast?.phenomenon
+        _dayOneNightTemp.value = Utils.formatForecastTempStringCelsius(
+            forecast.value?.forecasts?.get(DAY_ONE)?.nightForecast?.tempmin,
+            forecast.value?.forecasts?.get(DAY_ONE)?.nightForecast?.tempmax
+        )
 
-        _dayThreeDate.value = Utils.formatForecastDateString(forecast.value?.forecasts?.get(DAY_THREE)?.date)
-        _dayThreeIcon.value = Utils.assignIcons(forecast.value?.forecasts?.get(DAY_THREE)?.dayForecast?.phenomenon)
-        _dayThreeTemp.value = Utils.formatForecastTempStringCelsius(forecast.value?.forecasts?.get(DAY_THREE)?.dayForecast?.tempmin, forecast.value?.forecasts?.get(DAY_THREE)?.dayForecast?.tempmax)
+        _dayTwoDate.value =
+            Utils.formatForecastDateString(forecast.value?.forecasts?.get(DAY_TWO)?.date)
+        _dayTwoIcon.value =
+            Utils.assignIcons(forecast.value?.forecasts?.get(DAY_TWO)?.dayForecast?.phenomenon)
+        _dayTwoTemp.value = Utils.formatForecastTempStringCelsius(
+            forecast.value?.forecasts?.get(DAY_TWO)?.dayForecast?.tempmin,
+            forecast.value?.forecasts?.get(DAY_TWO)?.dayForecast?.tempmax
+        )
 
-        _dayFourDate.value = Utils.formatForecastDateString(forecast.value?.forecasts?.get(DAY_FOUR)?.date)
-        _dayFourIcon.value = Utils.assignIcons(forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.phenomenon)
-        _dayFourTemp.value = Utils.formatForecastTempStringCelsius(forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.tempmin, forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.tempmax)
+        _dayThreeDate.value =
+            Utils.formatForecastDateString(forecast.value?.forecasts?.get(DAY_THREE)?.date)
+        _dayThreeIcon.value =
+            Utils.assignIcons(forecast.value?.forecasts?.get(DAY_THREE)?.dayForecast?.phenomenon)
+        _dayThreeTemp.value = Utils.formatForecastTempStringCelsius(
+            forecast.value?.forecasts?.get(DAY_THREE)?.dayForecast?.tempmin,
+            forecast.value?.forecasts?.get(DAY_THREE)?.dayForecast?.tempmax
+        )
+
+        _dayFourDate.value =
+            Utils.formatForecastDateString(forecast.value?.forecasts?.get(DAY_FOUR)?.date)
+        _dayFourIcon.value =
+            Utils.assignIcons(forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.phenomenon)
+        _dayFourTemp.value = Utils.formatForecastTempStringCelsius(
+            forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.tempmin,
+            forecast.value?.forecasts?.get(DAY_FOUR)?.dayForecast?.tempmax
+        )
     }
 
     fun onNavigateToLocationWeather(location: LocationWeather) {
         _navigateToLocWeather.value = location
     }
 
-    fun onNavigateToLocationWeatherCompleted(){
+    fun onNavigateToLocationWeatherCompleted() {
         _navigateToLocWeather.value = null
     }
 

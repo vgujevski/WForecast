@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.zulu13.com.wforecast.R
+import android.zulu13.com.wforecast.data.ForecastRepository
+import android.zulu13.com.wforecast.data.database.getDatabase
 import android.zulu13.com.wforecast.data.models.getLocationWeather
 import android.zulu13.com.wforecast.databinding.MainFragmentBinding
 import androidx.databinding.DataBindingUtil
@@ -28,13 +30,20 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        //TODO implement Refresh functionality
+        //TODO fix overlapping view on small screen sizes
+
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
 
         val application = requireNotNull(this.activity).application
-        val viewModelFactory = SleepTrackerViewModelFactory(application)
+        val database = getDatabase(application)
+        val repository = ForecastRepository(database)
+
+        val viewModelFactory = SleepTrackerViewModelFactory(repository)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
-        val listAdapter = LocationWeatherAdapter(LocationWeatherListener {location ->
+        val listAdapter = LocationWeatherAdapter(LocationWeatherListener { location ->
             viewModel.onNavigateToLocationWeather(location)
         })
 
@@ -42,7 +51,8 @@ class MainFragment : Fragment() {
 
         viewModel.navigateToLocWeather.observe(this, Observer {
             it?.let {
-                this.findNavController().navigate(MainFragmentDirections.actionMainFragmentToLocationWeatherFragment(it))
+                this.findNavController()
+                    .navigate(MainFragmentDirections.actionMainFragmentToLocationWeatherFragment(it))
                 viewModel.onNavigateToLocationWeatherCompleted()
             }
         })

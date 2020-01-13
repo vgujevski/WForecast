@@ -21,7 +21,7 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-interface WeatherApiService{
+interface WeatherApiService {
     @GET("forecast")
     fun getPropertiesAsync():
             Deferred<Forecast>

@@ -10,19 +10,25 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 
-class LocationWeatherFragment : Fragment(){
+class LocationWeatherFragment : Fragment() {
     private lateinit var locationViewModel: LocationWeatherViewModel
     private lateinit var binding: LocationWeatherFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.location_weather_fragment, container, false)
+        // TODO fix overlapping views on small screen sizes
+        // TODO make view scrollable
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.location_weather_fragment, container, false)
         val arguments = LocationWeatherFragmentArgs.fromBundle(arguments!!)
         val viewModelFactory = LocationWeatherModelFactory(arguments.location)
         locationViewModel =
             ViewModelProviders.of(
-                this, viewModelFactory).get(LocationWeatherViewModel::class.java)
+                this, viewModelFactory
+            ).get(LocationWeatherViewModel::class.java)
 
         binding.locationWeatherViewModel = locationViewModel
 

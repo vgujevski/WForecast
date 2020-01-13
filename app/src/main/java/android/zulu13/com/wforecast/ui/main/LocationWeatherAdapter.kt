@@ -8,7 +8,8 @@ import android.zulu13.com.wforecast.utils.Utils
 import androidx.recyclerview.widget.RecyclerView
 
 
-class LocationWeatherAdapter(val clickListener: LocationWeatherListener) : RecyclerView.Adapter<LocationWeatherAdapter.ViewHolder>(){
+class LocationWeatherAdapter(val clickListener: LocationWeatherListener) :
+    RecyclerView.Adapter<LocationWeatherAdapter.ViewHolder>() {
     var data = listOf<LocationWeather>()
         set(value) {
             field = value
@@ -28,9 +29,9 @@ class LocationWeatherAdapter(val clickListener: LocationWeatherListener) : Recyc
         return data.size
     }
 
-    class ViewHolder private constructor(val binding: PlaceListItemBinding) : RecyclerView.ViewHolder(binding.root){
-
-        fun bind(clickListener: LocationWeatherListener, item: LocationWeather){
+    class ViewHolder private constructor(val binding: PlaceListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(clickListener: LocationWeatherListener, item: LocationWeather) {
 
             binding.location = item
             binding.textPlaceName.text = item.name
@@ -51,7 +52,6 @@ class LocationWeatherAdapter(val clickListener: LocationWeatherListener) : Recyc
     }
 }
 
-class LocationWeatherListener(val clickListener: (location : LocationWeather) -> Unit){
-
-    fun onClick(location : LocationWeather) = clickListener(location)
+class LocationWeatherListener(val clickListener: (location: LocationWeather) -> Unit) {
+    fun onClick(location: LocationWeather) = clickListener(location)
 }

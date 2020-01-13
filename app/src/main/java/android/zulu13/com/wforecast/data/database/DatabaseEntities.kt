@@ -12,6 +12,6 @@ data class DatabaseForecast constructor(
     val serializedForecast: String
 )
 
-fun DatabaseForecast.asDomainModel() : Forecast {
+fun DatabaseForecast.asDomainModel(): Forecast {
     return Json.parse(Forecast.serializer(), serializedForecast)
 }

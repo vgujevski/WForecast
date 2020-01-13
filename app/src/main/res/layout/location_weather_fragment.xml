@@ -16,11 +16,11 @@
 
         <TextView
             android:id="@+id/text_location_name"
-            android:text="@{locationWeatherViewModel.locationName}"
+            style="@style/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="40sp"
+            android:text="@{locationWeatherViewModel.locationName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,6 +28,7 @@
 
         <TextView
             android:id="@+id/text_average_temp_words"
+            style="@style/text_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -37,7 +38,6 @@
             android:paddingEnd="16dp"
             android:text="@{locationWeatherViewModel.avgTempWord}"
             android:textAlignment="center"
-            android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_location_name"
@@ -45,72 +45,76 @@
 
         <TextView
             android:id="@+id/text_title_day"
+            style="@style/text_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:text="@string/title_day"
-            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_average_temp_words" />
 
         <ImageView
             android:id="@+id/image_day_icon"
+            style="@style/icon_size_main"
             imageResource="@{locationWeatherViewModel.dayIcon}"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/weather_icon"
             app:layout_constraintBottom_toBottomOf="@+id/text_day_phenomenon"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/text_day_phenomenon"
             app:layout_constraintTop_toTopOf="@+id/text_title_day"
             app:srcCompat="@drawable/glaze" />
 
         <TextView
             android:id="@+id/text_day_phenomenon"
+            style="@style/text_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@{locationWeatherViewModel.dayPhenomenon}"
-            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_title_day"
             tools:text="Light rain" />
 
         <TextView
             android:id="@+id/text_title_night"
+            style="@style/text_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:text="@string/title_night"
-            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_day_phenomenon" />
 
         <ImageView
             android:id="@+id/image_night_icon"
+            style="@style/icon_size_main"
             imageResource="@{locationWeatherViewModel.nightIcon}"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/weather_icon"
             app:layout_constraintBottom_toBottomOf="@+id/text_night_phenomenon"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/text_night_phenomenon"
             app:layout_constraintTop_toTopOf="@+id/text_title_night"
             app:srcCompat="@drawable/very_sunny" />
 
         <TextView
             android:id="@+id/text_night_phenomenon"
+            style="@style/text_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@{locationWeatherViewModel.nightPhenomenon}"
-            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_title_night"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="Cloudy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

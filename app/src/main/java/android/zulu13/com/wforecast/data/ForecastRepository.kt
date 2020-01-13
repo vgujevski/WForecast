@@ -16,23 +16,23 @@ import kotlinx.serialization.json.Json
 private const val KEY = 1L
 
 @UnstableDefault
-class ForecastRepository(private val database: ForecastsDatabase){
+class ForecastRepository(private val database: ForecastsDatabase) {
 
-
-    val forecast: LiveData<Forecast> = Transformations.map(database.forecastDao.getForecast(KEY)){
-        it?.asDomainModel()
-    }
+    val forecast: LiveData<Forecast> = Transformations
+        .map(database.forecastDao.getForecast(KEY)) {
+            it?.asDomainModel()
+        }
 
     @UnstableDefault
-    suspend fun refreshForecast(){
-        withContext(Dispatchers.IO){
+    suspend fun refreshForecast() {
+        withContext(Dispatchers.IO) {
             Log.i("ForecastRepository", "refreshForecast called")
-            try{
+            try {
                 val forecast = WeatherApi.retrofitService.getPropertiesAsync().await()
                 val string = Json.stringify(Forecast.serializer(), forecast)
                 val freshForecast = DatabaseForecast(KEY, string)
                 database.forecastDao.insert(freshForecast)
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 //_status.value = "Failure: ${e.message}"
                 Log.i("ForecastRepository", "Error: $e")
             }

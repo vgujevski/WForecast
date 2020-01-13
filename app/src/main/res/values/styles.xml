@@ -6,30 +6,32 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">monospace</item>
     </style>
 
     <style name="text_place_black">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:fontFamily">monospace</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/fontColorDark</item>
+        <item name="android:textSize">@dimen/secondary_text_size</item>
     </style>
 
-    <style name="style_weekday_text">
-        <item name="android:fontFamily">monospace</item>
-        <item name="android:textSize">28sp</item>
+    <style name="text_title">
+        <item name="android:textSize">@dimen/primary_text_size</item>
     </style>
 
-    <style name="land_weekday_text">
-        <item name="android:fontFamily">monospace</item>
-        <item name="android:textSize">26sp</item>
+    <style name="text_primary">
+        <item name="android:textSize">@dimen/primary_text_size</item>
     </style>
 
-    <style name="land_today_text">
-        <item name="android:fontFamily">monospace</item>
-        <item name="android:textSize">26sp</item>
+    <style name="text_secondary">
+        <item name="android:textSize">@dimen/primary_text_size</item>
+    </style>
+    
+    <style name="icon_size_main">
+        <item name="android:layout_height">@dimen/icon_weather_height</item>
+        <item name="android:layout_width">@dimen/icon_weather_width</item>
     </style>
 
 </resources>

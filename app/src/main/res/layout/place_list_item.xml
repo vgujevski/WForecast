@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/text_place_phenomenon"
-            style="@style/text_place_black"
+            style="@style/text_secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -38,23 +38,26 @@
 
         <TextView
             android:id="@+id/text_place_temp"
-            style="@style/text_place_black"
+            style="@style/text_secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_place_phenomenon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_place_name"
             tools:text="2/3C" />
 
         <TextView
             android:id="@+id/text_place_name"
-            style="@style/text_place_black"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            style="@style/text_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_place_temp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="Kuressaare" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

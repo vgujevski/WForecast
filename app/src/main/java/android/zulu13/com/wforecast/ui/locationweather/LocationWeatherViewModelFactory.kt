@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 class LocationWeatherModelFactory(
-    private val location: LocationWeather) : ViewModelProvider.Factory {
+    private val location: LocationWeather
+) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LocationWeatherViewModel::class.java)) {

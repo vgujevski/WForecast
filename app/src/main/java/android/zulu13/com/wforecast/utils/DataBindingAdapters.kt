@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 
 
 @BindingAdapter("imageResource")
-fun setImageViewResource(view: ImageView, resId : Int) {
+fun setImageViewResource(view: ImageView, resId: Int) {
     view.setImageResource(resId)
 }
 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="mainViewModel"
             type="android.zulu13.com.wforecast.ui.main.MainViewModel" />
@@ -13,14 +14,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
         android:background="@drawable/background2">
+
+        <TextView
+            android:id="@+id/text_error_message"
+            style="@style/text_primary"
+            layoutVisible="@{mainViewModel.errorMessageVisible}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error_no_internet" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
 
             android:id="@+id/main"
+            layoutVisible="@{mainViewModel.layoutVisible}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            layoutVisible="@{mainViewModel.layoutVisible}"
             tools:context=".ui.main.MainFragment">
 
             <androidx.constraintlayout.widget.Guideline
@@ -28,17 +39,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="160dp" />
+                app:layout_constraintGuide_begin="143dp" />
 
             <TextView
                 android:id="@+id/text_title_day"
+                style="@style/text_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/start_margin"
                 android:fontFamily="monospace"
                 android:text="@string/title_day"
                 android:textAlignment="center"
-                android:textSize="30sp"
                 android:typeface="monospace"
                 app:layout_constraintBottom_toTopOf="@+id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,34 +57,37 @@
 
             <ImageView
                 android:id="@+id/image_day_one_day_icon"
+                style="@style/icon_size_main"
                 imageResource="@{mainViewModel.dayOneDayIcon}"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:contentDescription="@string/weather_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/text_title_day"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/text_title_day"
                 app:layout_constraintTop_toTopOf="@+id/text_title_day" />
 
             <TextView
                 android:id="@+id/text_day_one_day_temp"
+                style="@style/text_primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{mainViewModel.dayOneDayTemp}"
-                android:textSize="30sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline4"
                 app:layout_constraintEnd_toEndOf="@+id/text_day_one_day_phenomenon"
                 app:layout_constraintTop_toBottomOf="@+id/text_day_one_day_phenomenon"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="2/5 C" />
 
             <TextView
                 android:id="@+id/text_day_one_day_phenomenon"
+                style="@style/text_primary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@{mainViewModel.dayOneDayPhenomenon}"
                 android:textAlignment="textEnd"
-                android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toTopOf="parent"
@@ -88,22 +102,21 @@
 
             <TextView
                 android:id="@+id/text_title_night"
+                style="@style/text_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/start_margin"
                 android:fontFamily="monospace"
                 android:text="@string/title_night"
                 android:textAlignment="center"
-                android:textSize="30sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline_today"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
             <ImageView
                 android:id="@+id/image_day_one_night_icon"
+                style="@style/icon_size_main"
                 imageResource="@{mainViewModel.dayOneNightIcon}"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:contentDescription="@string/weather_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/text_title_night"
@@ -112,12 +125,13 @@
 
             <TextView
                 android:id="@+id/day_one_night_phenomenon"
+                style="@style/text_primary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@{mainViewModel.dayOneNightPhenomenon}"
                 android:textAlignment="textEnd"
-                android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toTopOf="@+id/guideline4"
@@ -125,13 +139,14 @@
 
             <TextView
                 android:id="@+id/day_one_night_temp"
+                style="@style/text_primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{mainViewModel.dayOneNightTemp}"
-                android:textSize="30sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline_today"
                 app:layout_constraintEnd_toEndOf="@+id/day_one_night_phenomenon"
                 app:layout_constraintTop_toBottomOf="@+id/day_one_night_phenomenon"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="-2/4 C" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -143,10 +158,10 @@
 
             <TextView
                 android:id="@+id/text_day_two_date"
-                style="@style/style_weekday_text"
-                android:layout_width="0dp"
+                style="@style/text_secondary"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/start_margin"
                 android:text="@{mainViewModel.dayTwoDate}"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -156,9 +171,8 @@
 
             <ImageView
                 android:id="@+id/image_day_two_icon"
+                style="@style/icon_size_main"
                 imageResource="@{mainViewModel.dayTwoIcon}"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/weather_icon"
                 android:src="@drawable/snowing"
@@ -169,7 +183,7 @@
 
             <TextView
                 android:id="@+id/text_day_two_temp"
-                style="@style/style_weekday_text"
+                style="@style/text_secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -188,10 +202,10 @@
 
             <TextView
                 android:id="@+id/text_day_three_date"
-                style="@style/style_weekday_text"
+                style="@style/text_secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/start_margin"
                 android:text="@{mainViewModel.dayThreeDate}"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="parent"
@@ -200,9 +214,8 @@
 
             <ImageView
                 android:id="@+id/image_day_three_icon"
+                style="@style/icon_size_main"
                 imageResource="@{mainViewModel.dayThreeIcon}"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/weather_icon"
                 android:src="@drawable/storms"
@@ -213,7 +226,7 @@
 
             <TextView
                 android:id="@+id/text_day_three_temp"
-                style="@style/style_weekday_text"
+                style="@style/text_secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -232,10 +245,10 @@
 
             <TextView
                 android:id="@+id/text_day_four_date"
-                style="@style/style_weekday_text"
+                style="@style/text_secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/start_margin"
                 android:text="@{mainViewModel.dayFourDate}"
                 app:layout_constraintBottom_toTopOf="@+id/guideline6"
                 app:layout_constraintStart_toStartOf="parent"
@@ -244,9 +257,8 @@
 
             <ImageView
                 android:id="@+id/image_day_four_icon"
+                style="@style/icon_size_main"
                 imageResource="@{mainViewModel.dayFourIcon}"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/weather_icon"
                 android:src="@drawable/very_sunny"
@@ -257,7 +269,7 @@
 
             <TextView
                 android:id="@+id/text_day_four_temp"
-                style="@style/style_weekday_text"
+                style="@style/text_secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"

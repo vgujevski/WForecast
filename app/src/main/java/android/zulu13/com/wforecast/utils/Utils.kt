@@ -5,29 +5,27 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
-
     /**
      *  Calculating average and returning temperature in words
      *  i.e. The average temperature today is "minus twenty five degrees"  celsius.
      * */
-
-    fun avgCelsiusTempToWords(minTemp: Int, maxTemp: Int) : String{
+    fun avgCelsiusTempToWords(minTemp: Int, maxTemp: Int): String {
         val prefix = "The average temperature today is "
         val postfix = " celsius."
         var avg = (minTemp + maxTemp) / 2
         var minus = ""
         var degrees = " degrees"
-        if(avg == 0){
-            return  prefix + "zero degrees" + postfix
+        if (avg == 0) {
+            return prefix + "zero degrees" + postfix
         }
-        if(avg < 0){
+        if (avg < 0) {
             minus = "minus"
             avg = -avg
         }
-        if(avg == 1){
+        if (avg == 1) {
             degrees = " degree"
         }
-        if(avg < 0){
+        if (avg < 0) {
             minus = "minus"
             avg = -avg
         }
@@ -80,12 +78,13 @@ object Utils {
 
         return if (avg == 0) "$prefix $minus $soFar $degrees $postfix" else prefix + minus + numNames[avg] + " hundred" + soFar + degrees + postfix
     }
+
     /**
      *  Formats 2019-12-23 to Mon, Dec 23
      * */
     @JvmStatic
-    fun formatForecastDateString(fullDayForecast: String?) : String{
-        if(fullDayForecast == null){
+    fun formatForecastDateString(fullDayForecast: String?): String {
+        if (fullDayForecast == null) {
             return ""
         }
         val sdf = SimpleDateFormat("EEE, MMM d", Locale.ENGLISH) // Mon, Dec 23
@@ -98,27 +97,26 @@ object Utils {
      *  Returns -5/2 (Celsius sign) format
      * */
     @JvmStatic
-    fun formatForecastTempStringCelsius(minTemp: Int?, maxTemp: Int?) : String{
-        return if(minTemp == null && maxTemp == null){
+    fun formatForecastTempStringCelsius(minTemp: Int?, maxTemp: Int?): String {
+        return if (minTemp == null && maxTemp == null) {
             ""
-        }else if(minTemp == null && maxTemp != null){
+        } else if (minTemp == null && maxTemp != null) {
             "$maxTemp\u2103"
-        }else if(minTemp != null && maxTemp == null){
+        } else if (minTemp != null && maxTemp == null) {
             "$minTemp\u2103"
-        }else if(minTemp != null && maxTemp != null && minTemp < maxTemp){
+        } else if (minTemp != null && maxTemp != null && minTemp < maxTemp) {
             "$minTemp/$maxTemp\u2103"
-        }else if(minTemp != null && maxTemp != null && minTemp == maxTemp){
+        } else if (minTemp != null && maxTemp != null && minTemp == maxTemp) {
             "$minTemp\u2103"
-        } else{
+        } else {
             "$maxTemp/$minTemp\u2103"
         }
     }
 
-
     /** Returns resource id depending on phenomenon */
     @JvmStatic
-    fun assignIcons(phenomenon : String?) : Int{
-        return when(phenomenon){
+    fun assignIcons(phenomenon: String?): Int {
+        return when (phenomenon) {
             "Clear" -> R.drawable.very_sunny
             "Few clouds" -> R.drawable.sunny
             "Variable clouds" -> R.drawable.clouds
