@@ -20,7 +20,6 @@ class LocationWeatherFragment : Fragment() {
     ): View? {
 
         // TODO fix overlapping views on small screen sizes
-        // TODO make view scrollable
         binding =
             DataBindingUtil.inflate(inflater, R.layout.location_weather_fragment, container, false)
         val arguments = LocationWeatherFragmentArgs.fromBundle(arguments!!)

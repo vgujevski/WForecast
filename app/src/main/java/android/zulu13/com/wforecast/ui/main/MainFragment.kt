@@ -1,9 +1,8 @@
 package android.zulu13.com.wforecast.ui.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.zulu13.com.wforecast.R
 import android.zulu13.com.wforecast.data.ForecastRepository
 import android.zulu13.com.wforecast.data.database.getDatabase
@@ -30,9 +29,8 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        //TODO implement Refresh functionality
         //TODO fix overlapping view on small screen sizes
+        //TODO add error message to landscape layout
 
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
 
@@ -59,14 +57,40 @@ class MainFragment : Fragment() {
 
         viewModel.forecast.observe(this, Observer {
             it?.let {
-                viewModel.updateUi()
                 listAdapter.data = it.forecasts[0].getLocationWeather()
+            }
+        })
+
+        viewModel.refreshData.observe(this, Observer { shouldRefresh ->
+            if (shouldRefresh) {
+                viewModel.refreshData()
+                viewModel.onRefreshDataCompleted()
             }
         })
 
         binding.mainViewModel = viewModel
         binding.lifecycleOwner = this
 
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.menu_main_refresh -> {
+                Log.i("main_menu", "refresh clicked")
+                viewModel.onRefreshData()
+                //viewModel.refreshData()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

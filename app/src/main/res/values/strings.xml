@@ -4,4 +4,5 @@
     <string name="title_night">NIGHT:</string>
     <string name="weather_icon">weather icon</string>
     <string name="error_no_internet">There is no internet connection</string>
+    <string name="menu_main_refresh">refresh</string>
 </resources>
